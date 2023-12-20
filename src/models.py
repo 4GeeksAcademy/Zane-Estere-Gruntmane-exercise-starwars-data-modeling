@@ -19,19 +19,20 @@ class User (Base):
 class Favorits(Base):
     __tablename__ = 'favorite'
     id = Column(Integer, primary_key=True)
+    user_id = Column (Integer, ForeignKey ('user.id'))
     fav_planets = Column(Integer, ForeignKey('planets.id'))
     fav_people = Column(Integer, ForeignKey('people.id'))
     fav_starships = Column(Integer, ForeignKey('starships.id'))
 
 class People(Base): 
-    __tablename__ = 'People'
+    __tablename__ = 'people'
     id = Column(Integer, primary_key=True)
     name = Column(String())
-    user_id = Column(Integer, ForeignKey('user.id'))
+    favorit_id = Column(Integer, ForeignKey('favorite_id'))
 
 
 class Starships (Base): 
-    __tablename__ = 'Starships'
+    __tablename__ = 'starships'
     id = Column(Integer, primary_key=True)
     name = Column (String()) 
     model = Column (String())
@@ -39,7 +40,7 @@ class Starships (Base):
     
 
 class Planets(Base):
-    __tablename__ = 'Planets'
+    __tablename__ = 'planets'
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
